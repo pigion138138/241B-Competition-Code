@@ -100,7 +100,7 @@ task usercontrol(){
   			motor[LR] = 80;
   		}
   		//if button 7R is not pressed stop motor LL and LR
-  		if(vexRT[Btn7R] == 0){
+  		if(vexRT[Btn7D] == 1){
   			motor[LL] = 0;
   			motor[LR] = 0;
   		}

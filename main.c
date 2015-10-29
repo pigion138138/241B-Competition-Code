@@ -78,11 +78,44 @@ task autonomous(){
  */
 task usercontrol(){
 	startTask(userControlls);
+	bool isIntakeOn = false;
+	bool isLauncherOn = false;
 
   while (true)
 	{
     if(bVEXNETActive){
+			/////////////////////////////////////////////////////////////////////////////////////////
+			//
+			//                                      Drive
+			//
+			/////////////////////////////////////////////////////////////////////////////////////////
 
+			//The following two lines allow the driver to controll the robot
+			motor[RD] = vexRT[Ch2];
+			motor[LD] = vexRT[Ch3];
+
+
+			if(vexRT[Btn7D] == 1){	//if button 7D is pressed toggle launcher (On / Off )
+				if(isLauncherOn){
+					motor[LL] = 0;
+					motor[LR] = 0;
+					isLauncherOn = false;
+				}else{
+					motor[LL] = 80;
+					motor[LR] = 80;
+					isLauncherOn = true;
+				}
+			}
+
+			if(vexRT[Btn8D] == 1){	//if button 8D is pressed toggle intake  ( On / Off)
+				if(isIntakeOn){
+					motor[intake] = 0;
+					isIntakeOn = false;
+				}else{
+					motor[intake] = 80;
+					isIntakeOn = true;
+				}
+			}
 
       wait1Msec(10);
     }

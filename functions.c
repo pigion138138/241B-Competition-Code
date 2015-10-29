@@ -488,32 +488,15 @@ task runMotors(){
 	}
 }
 
+/**
+* Allow the user to controll the bot in a thread
+* @warning This task currently does nothing
+*
+* @author Kyle Moran kyle@llamachair.com
+*
+*/
+
+
 task userControlls(){
 
-/////////////////////////////////////////////////////////////////////////////////////////
-      //
-      //                                      Drive
-      //
-      /////////////////////////////////////////////////////////////////////////////////////////
-  		motor[RD] = vexRT[Ch2];
-  		motor[LD] = vexRT[Ch3];
-
-  		//if button 7D is pressed start launcher
-  		if(vexRT[Btn7D] == 1){
-  			motor[LL] = 80;
-  			motor[LR] = 80;
-  		}
-  		//if button 7L is pressed stop launcher
-  		if(vexRT[Btn7L] == 1){
-  			motor[LL] = 0;
-  			motor[LR] = 0;
-  		}
-  		//if button 8D is pressed start intake
-			if(vexRT[Btn8D] == 1){
-				motor[intake] = 80;
-			}
-			//if button 8R is pressed stop intake
-			if(vexRT[Btn8R] == 1){
-				motor[intake] = 0;
-			}
 }

@@ -2,6 +2,7 @@
 #pragma config(Sensor, dgtl1,  encoder,        sensorQuadEncoder)
 #pragma config(Motor,  port2,           backl,         tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           frontl,        tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port4,           intake,        tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           LL,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port6,           LR,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           backr,         tmotorVex393_MC29, openLoop)
@@ -17,6 +18,7 @@
  * @author		Sean Kelley      sgtkode01@gmail.com
  * @author		Bernard Suwirjo  bsuwirjo@gmail.com
  * @author 		Spencer Couture  spence.couture@gmail.com
+ * @author		Kyle Moran			 kyle@llamachair.com
  */
 
 

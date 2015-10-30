@@ -492,6 +492,15 @@ task runMotors(){
 	}
 }
 
+/**
+* Allow the user to controll the bot in a thread
+* @warning This task currently does nothing
+*
+* @author Kyle Moran kyle@llamachair.com
+*
+*/
+
+
 task userControlls(){
 
 

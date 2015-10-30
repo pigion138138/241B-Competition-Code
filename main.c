@@ -131,6 +131,7 @@ task usercontrol(){
 
 			if(vexRT[Btn5D] == 0){
 				isIntakeButton = false;
+
 			}
 
       wait1Msec(10);

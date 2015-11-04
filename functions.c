@@ -67,8 +67,8 @@ void clearMotors(){
 */
 void setMotors(int power){
 	//Set all motor values to power value
-	motor[frontl]  = power;
-	motor[backl]   = power;
+	motor[LD]  = power;
+	motor[RD]   = power;
 }
 
 /**

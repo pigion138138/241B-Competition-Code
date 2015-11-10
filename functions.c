@@ -500,8 +500,30 @@ task runMotors(){
 *
 */
 
-
 task userControlls(){
+
+
+}
+
+
+
+/**
+* LCD write function
+*
+* @author Spencer Couture spence.couture@gmail.com
+*
+* @param  isProMode 	 bool, if the mode is pro or not
+*
+*/
+
+void writeToLCD(bool isProMode){
+		displayLCDString(1, 6, "MODE");
+		if(isProMode){
+			displayLCDString(2, 0, "SCRUB    >PRO");
+		}
+		else{
+			displayLCDString(2, 0, ">SCRUB    PRO");
+		}
 
 
 }

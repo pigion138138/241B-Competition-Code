@@ -66,13 +66,6 @@ void pre_auton(){
  * Period of match when bot is using only code to operate.
  */
 task autonomous(){
-	//turnRightDegrees(90, 100);
-
-	setMotors(115);
-	wait1Msec(5000);
-	setMotors(0);
-
-	//motor[intake] = 90;
 
 
 

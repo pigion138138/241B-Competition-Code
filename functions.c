@@ -53,6 +53,7 @@
 void clearMotors(){
 	//Set all motor values to 0
 	motor[RD]  = 0;
+	motor[LD] = 0;
 }
 
 /**

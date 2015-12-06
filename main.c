@@ -1,5 +1,6 @@
 #pragma config(Sensor, in1,    gyro,           sensorGyro)
 #pragma config(Sensor, dgtl1,  encoder,        sensorQuadEncoder)
+#pragma config(Sensor, dgtl12, launchBall,     sensorTouch)
 #pragma config(Motor,  port2,           LD,            tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           RD,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           intake,        tmotorVex393_MC29, openLoop)
@@ -50,8 +51,6 @@ void pre_auton(){
 	bStopTasksBetweenModes = true;
 
 
-
-
 }
 
 
@@ -66,10 +65,40 @@ void pre_auton(){
  * Period of match when bot is using only code to operate.
  */
 task autonomous(){
+	//If the intake does not work:
+	/*
+	activateLauncher(90);
+	wait1Msec(2000);
+	deactivateLauncher();
+	*/
+
+	//If the intake is working:
 
 
-
-
+	activateLauncher(90);
+	wait1Msec(1750);
+	deactivateLauncher();
+	motor[intake] = 90;
+	wait1Msec(200);
+	wait1Msec(3000);
+	motor[intake] = 0;
+	activateLauncher(90);
+	wait1Msec(1750);
+	deactivateLauncher();
+	motor[intake] = 90;
+	wait1Msec(200);
+	wait1Msec(3000);
+	motor[intake] = 0;
+	activateLauncher(90);
+	wait1Msec(1750);
+	deactivateLauncher();
+	motor[intake] = 90;
+	wait1Msec(200);
+	wait1Msec(3000);
+	motor[intake] = 0;
+	activateLauncher(90);
+	wait1Msec(1750);
+	deactivateLauncher();
 }
 
 
@@ -86,9 +115,9 @@ task autonomous(){
  */
 task usercontrol(){
 	startTask(userControlls);
-	bool isIntakeOn = false;
-	bool isLauncherOn = false;
-	bool isIntakeButton = false;
+	bool isIntakeOn = false;			//boolean for if the intake is on
+	bool isLauncherOn = false;		//boolean for if the launcher is on
+	bool isIntakeButton = false;	//boolean for if the int
 	bool isLauncherButton = false;
   while (true)
 	{
@@ -101,13 +130,17 @@ task usercontrol(){
   		motor[RD] = vexRT[Ch2];
   		motor[LD] = vexRT[Ch3];
 
+  		if(sensorValue[launchBall] == 1){
+  			motor[intake] = 0 ;
+  		}
 
 			if(vexRT[Btn6D] == 1){
 				if(isLauncherButton == false){
 					if(isLauncherOn){
 						deactivateLauncher();
 						isLauncherOn = false;
-					}else{
+					}
+					else{
 						activateLauncher(90);
 						isLauncherOn = true;
 					}
@@ -119,7 +152,8 @@ task usercontrol(){
 					if(isIntakeOn){
 						motor[intake] = 0;
 						isIntakeOn = false;
-					}else{
+					}
+					else if(sensorValue[launchBall] != 1){
 						motor[intake] = 90;
 						isIntakeOn = true;
 					}

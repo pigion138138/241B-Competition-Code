@@ -1,5 +1,6 @@
 #pragma config(Sensor, in1,    gyro,           sensorGyro)
 #pragma config(Sensor, dgtl1,  encoder,        sensorQuadEncoder)
+#pragma config(Sensor, dgtl12, inLauncher,     sensorTouch)
 #pragma config(Motor,  port2,           LD,            tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           RD,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           intake,        tmotorVex393_MC29, openLoop)
@@ -98,8 +99,8 @@ task usercontrol(){
       //                                      Drive
       //
       /////////////////////////////////////////////////////////////////////////////////////////
-  		motor[RD] = vexRT[Ch2];
-  		motor[LD] = vexRT[Ch3];
+  		motor[RD] = vexRT[Ch2]*.9;
+  		motor[LD] = vexRT[Ch3]*.9;
 
 
 			if(vexRT[Btn6D] == 1){
@@ -114,7 +115,7 @@ task usercontrol(){
 					isLauncherButton = true;
 				}
 			}
-			if(vexRT[Btn5D] == 1){
+			if(vexRT[Btn5D] == 1 && sensorValue[inLauncher] == 0){
 				if(isIntakeButton == false){
 					if(isIntakeOn){
 						motor[intake] = 0;

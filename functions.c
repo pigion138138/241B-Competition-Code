@@ -1,5 +1,6 @@
 #pragma config(Sensor, in1,    gyro,           sensorGyro)
 #pragma config(Sensor, dgtl1,  encoder,        sensorQuadEncoder)
+#pragma config(Sensor, dgtl12, inLauncher,     sensorTouch)
 #pragma config(Motor,  port2,           LD,            tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           RD,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           intake,        tmotorVex393_MC29, openLoop)
@@ -455,10 +456,10 @@ void turnLeftSeconds(float seconds, float speed=118)
 * @param		speed		speed of motors
 */
 void activateLauncher(float speed){
-	motor[LL1] = speed;
-	motor[LL2] = speed;
-	motor[LR1] = speed;
-	motor[LR2] = speed;
+		motor[LL1] = speed;
+		motor[LL2] = speed;
+		motor[LR1] = speed;
+		motor[LR2] = speed;
 }
 /**
 * Deactivates Launcher

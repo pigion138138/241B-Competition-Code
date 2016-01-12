@@ -1,6 +1,6 @@
 /** @file main.h
  * @brief Header file for global functions
- * 
+ *
  * Any experienced C or C++ programmer knows the importance of header files. For those who
  * do not, a header file allows multiple files to reference functions in other files without
  * necessarily having to see the code (and therefore causing a multiple definition). To make
@@ -79,6 +79,9 @@ extern "C" {
 #define intake2 6
 #define l1 8	//Launcher Motors
 #define l2 9
+
+//THIS COMMENT IS ONLY TO TEST IF THIS IS LEGIT
+
 
 #define loadSwitch 1	//Pressed while ball is in launcher
 #define launchSwitch 2	//Pressed while launcher is cocked

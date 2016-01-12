@@ -113,5 +113,3 @@ void telemDisp(){
 	lcdPrint(uart1, 1, "Bat: %u", getBatPercent()); //max 9 characters
 
 }
-
-

@@ -3,7 +3,7 @@
  *
  *
  *  Created on: Dec 17, 2015
- *      Author: tim
+ *      Author: Spencer Couture
  **/
 
 #include "main.h"

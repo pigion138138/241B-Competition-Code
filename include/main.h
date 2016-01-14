@@ -71,43 +71,40 @@ extern "C" {
  */
 
 //Motor and sensor ports
-#define lf 5	//Drive Motors
-#define rf 4
-#define rb 2
-#define lb 3
-#define intake1 7	//Intake Morors
-#define intake2 6
-#define l1 8	//Launcher Motors
-#define l2 9
 
-//THIS COMMENT IS ONLY TO TEST IF THIS IS LEGIT
-
-
-#define loadSwitch 1	//Pressed while ball is in launcher
-#define launchSwitch 2	//Pressed while launcher is cocked
-
+//Analog
+#define LD 2
+#define RD 3
+#define intake 4
+#define LL1 5
+#define LL2 6
+#define LR1 7
+#define LR2 8
+//Digital
+#define encoder 1
+#define inLauncher 12
 //Other Constants
-
-#define dx .9 //drive multiplier
-
-#define batMax 7200
-#define batMin 0
-
-#define maxShots 100
+#define motorFrac .9  //what the input is multiplied to before goes to motor
+#define MOTOR_SPEED 118 //default motor speed
+#define TIMEOUT_CNT_PER_SEC 10 //amount of timeout counts per second
 
 
-int isLoaded();
-int isCocked();
-void startLaunchMotors();
-void stopLaunchMotors();
-void startIntakeMotors();
-void reverseIntakeMotors();
-void stopIntakeMotors();
-void loadNautilus();
-void cockNautilus();
-void fireNautilus();
-int getBatPercent();
-void telemDisp();
+
+void clearMotors();
+void setMotors(int);
+void setMotorsLeft(int);
+void setMotorsRight(int);
+void backwardSeconds(float, int);
+void forwardSeconds(float, int);
+void fancyTurnRightDegrees(int, bool, int);
+void fancyTurnLeftDegrees(int, bool, int);
+void turnRightDegrees(float, float);
+void turnLeftDegrees(float, float);
+void turnRightSeconds(float, float);
+void turnLeftSeconds(float, float);
+void activateLauncher(float);
+void deactivateLauncher();
+
 
 
 void autonomous();

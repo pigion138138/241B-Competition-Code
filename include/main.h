@@ -80,6 +80,8 @@ extern "C" {
 #define LL2 6 //reversed
 #define LR1 7
 #define LR2 8
+
+#define gyro 0; //add when we have a gyro
 //Digital
 #define encoder 1
 #define inLauncher 12
@@ -96,10 +98,8 @@ void setMotorsLeft(int);
 void setMotorsRight(int);
 void backwardSeconds(float, int);
 void forwardSeconds(float, int);
-void fancyTurnRightDegrees(int, bool, int);
-void fancyTurnLeftDegrees(int, bool, int);
 void turnRightDegrees(float, float);
-void turnLeftDegrees(float, float);
+void turnLeftDegrees(float, float); //not implimented
 void turnRightSeconds(float, float);
 void turnLeftSeconds(float, float);
 void activateLauncher(float);

@@ -8,14 +8,14 @@
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of Purdue University ACM SIG BOTS nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
+ *		 * Redistributions of source code must retain the above copyright
+ *			 notice, this list of conditions and the following disclaimer.
+ *		 * Redistributions in binary form must reproduce the above copyright
+ *			 notice, this list of conditions and the following disclaimer in the
+ *			 documentation and/or other materials provided with the distribution.
+ *		 * Neither the name of Purdue University ACM SIG BOTS nor the
+ *			 names of its contributors may be used to endorse or promote products
+ *			 derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -53,39 +53,72 @@
  */
 
 void operatorControl() {
+	bool isIntakeOn = false;
+	bool isLauncherOn = false;
+	bool isIntakeButton = false;
+	bool isLauncherButton = false;
 
-	while (1) {
-		telemDisp();
-		//DEF STUFF
-		int rightDrive=joystickGetAnalog(1, 2) * dx;
-		int leftDrive=joystickGetAnalog(1, 3) * dx;
-		//MOTOR CONTROL
-		motorSet(lf, -leftDrive);
-		motorSet(rf, rightDrive);
-		motorSet(lb, -leftDrive);
-		motorSet(rb, rightDrive);
+		while (1) {
+				int rightDrive = joystickGetAnalog(1, 2) * motorFrac;
+				int leftDrive = joystickGetAnalog(1, 3) * motorFrac;
+				motorSet(LD, -leftDrive);
+				motorSet(RD, rightDrive);
 
-		//INTAKE CONTROL
-		if(joystickGetDigital(1, 5, JOY_DOWN)){	//spin intake foreward
-			startIntakeMotors();
+				if(joystickGetDigital(1, 6, JOY_DOWN)){
+					if(isLauncherButton == false){
+						if(isLauncherOn == true){
+							deactivateLauncher();
+							isLauncherOn = false;
+						}
+						else{
+							activateLauncher(90);
+							isLauncherOn = true;
+						}
+						isLauncherButton = false;
+					}
+				}
+
+
+				if(joystickGetDigital(1, 5, JOY_DOWN) && !digitalread(inLauncher)){
+						if(isIntakeButton == false){
+							if(isIntakeOn){
+								motorSet(intake, 0);
+								isIntakeOn = false;
+							}
+							else{
+								motorSet(intake, 90);
+								isIntakeOn = true;
+							}
+							isIntakeButton = true;
+						}
+				}
+
+
+				if(!joystickGetDigital(1, 6, JOY_DOWN)){
+					isLauncherButton = false;
+				}
+
+				if(!joystickGetDigital(1, 5, JOY_DOWN)){
+					isIntakeButton = false;
+				}
+				delay(10);
 		}
-		else if(joystickGetDigital(1, 5, JOY_UP)){	//spin inatke backwards
-			reverseIntakeMotors();
-		}
-		else{//STOP INTAKE
-			stopIntakeMotors();
-		}
-
-		//LAUNCHER CONTROL
-		if (joystickGetDigital(1, 6, JOY_DOWN)){
-			startLaunchMotors();
-		}
-		else {							//STOP LAUNCH MOTORS
-			stopLaunchMotors();
-		}
-
-		delay(5);
-
-	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////

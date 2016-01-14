@@ -73,11 +73,11 @@ extern "C" {
 //Motor and sensor ports
 
 //Analog
-#define LD 2
+#define LD 2 //reversed
 #define RD 3
 #define intake 4
-#define LL1 5
-#define LL2 6
+#define LL1 5 //reversed
+#define LL2 6 //reversed
 #define LR1 7
 #define LR2 8
 //Digital

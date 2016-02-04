@@ -128,6 +128,14 @@ task usercontrol(){
 				}
 			}
 
+			if(vexRT[Btn5U] == 1){
+					motor[intake] = -90;
+			}
+
+			if(vexRT[Btn5U] == 0 && motor[intake] == -90){
+				motor[intake] = 0;
+			}
+
 			if(vexRT[Btn6D] == 0){
 				isLauncherButton = false;
 			}

@@ -130,6 +130,7 @@ task usercontrol(){
 
 			if(vexRT[Btn5U] == 1){
 					motor[intake] = -90;
+					isIntakeOn = false;
 			}
 
 			if(vexRT[Btn5U] == 0 && motor[intake] == -90){

@@ -1,6 +1,6 @@
 #pragma config(Sensor, in1,    gyro,           sensorGyro)
+#pragma config(Sensor, in2,    inLauncher,     sensorReflection)
 #pragma config(Sensor, dgtl1,  encoder,        sensorQuadEncoder)
-#pragma config(Sensor, dgtl12, inLauncher,     sensorTouch)
 #pragma config(Motor,  port2,           LD,            tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           RD,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port4,           intake,        tmotorVex393_MC29, openLoop)
@@ -54,7 +54,7 @@ void pre_auton(){
 
 
 }
-
+//get rekt
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -67,14 +67,18 @@ void pre_auton(){
  * Period of match when bot is using only code to operate.
  */
 task autonomous(){
-
-
-
-
+	for(int i=0;i<4;i++){
+		if(SensorValue[inLauncher] < 10){
+			motor[intake] = 0;
+			activateLauncher(90);
+			wait1Msec(1000);
+			deactivateLauncher();
+		}else{
+			motor[intake] = 90;
+			i--;
+		}
+	}
 }
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //

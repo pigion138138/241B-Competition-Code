@@ -21,22 +21,20 @@ float  targetError;
 float  targetLastError;
 float  targetIntegral;
 float  targetDerivative;
-float  targetOver;
 float  targetDrive;
 
 float  perpError;
 float  perpLastError;
 float  perpIntegral;
 float  perpDerivative;
-float  perpOver;
 float  perpDrive;
 
 /*
  * These are the contants for the parts of the PID loop.
  * Edit these in the live debugger each test. At its most
- * basic, pid_Kp and pid_Ki will allow the robot to reach
+ * basic, Kp and Ki will allow the robot to reach
  * the target faster but will create more over shooting.
- * pid_Kd slows the robot down but prevents over shooting.
+ * Kd slows the robot down but prevents over shooting.
  *
 */
 float  target_Kp = 0.5;
@@ -62,7 +60,7 @@ task main()
     perpError = sideSonicF_Val - sideSonicB_Val;
 
     // integral - if Ki is not 0
-    if( pid_Ki != 0 ){
+    if( target_Ki != 0 && perp_Ki != 0 ){
         // If we are inside controlable window then integrate the error
         if( abs(targetError) < PID_INTEGRAL_LIMIT ){
            targetIntegral = targetIntegral + targetError;

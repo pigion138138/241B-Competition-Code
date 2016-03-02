@@ -61,7 +61,9 @@ task main()
     }
 
     // calculate error
-		targetError = target - frontSonic_Val;
+    // amount the robot is off from the far end
+    targetError = target - frontSonic_Val;
+    // amount the robot is off from being perpendicular with the far end
     perpError = sideSonicF_Val - sideSonicB_Val;
 
     // integral - if Ki is not 0

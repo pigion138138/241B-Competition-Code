@@ -11,7 +11,7 @@ int target = 100; // 10 centimeters
 #define PID_DRIVE_MAX       127.0
 #define PID_DRIVE_MIN     (-127.0)
 
-#define PID_INTEGRAL_LIMIT  500.0
+#define PID_INTEGRAL_LIMIT  3000.0
 
 float  frontSonic_Val;
 float  sideSonicF_Val;
@@ -55,6 +55,11 @@ task main()
     sideSonicF_Val = SensorValue[sideSonicF];
     sideSonicB_Val = SensorValue[sideSonicB];
 
+    // if the robot is within 5 mm of the target and 5 mm of being straight, break from the loop
+    if((frontSonic_Val < target+5 || frontSonic_Val > target-5) && abs(sideSonicF_Val - sideSonicB_Val) < 5){
+    	break;
+    }
+
     // calculate error
 		targetError = target - frontSonic_Val;
     perpError = sideSonicF_Val - sideSonicB_Val;
@@ -77,27 +82,37 @@ task main()
         perpIntegral = 0;
   	}
 
-    // calculate the derivative
+    // calculate the derivatives
     targetDerivative = targetError - targetLastError;
     targetLastError  = targetError;
 
     perpDerivative = perpError - perpLastError;
     perpLastError  = perpError;
 
-    // calculate drive
+    // calculate drive values
     targetDrive = (target_Kp * targetError) + (target_Ki * targetIntegral) + (target_Kd * targetDerivative);
     perpDrive = (perp_Kp * perpError) + (perp_Ki * perpIntegral) + (perp_Kd * perpDerivative);
 
     // limit drive
-    if( (abs(targetDrive) + abs(perpDrive)) > PID_DRIVE_MAX ){
+	  if( (abs(targetDrive) + abs(perpDrive)) > PID_DRIVE_MAX ){
+	    // scale the drive values proportionally to how much they are over the max
 			targetDrive = (targetDrive/(targetDrive + perpDrive)) * PID_DRIVE_MAX;
 			perpDrive = (perpDrive/(targetDrive + perpDrive)) * PID_DRIVE_MAX;
   	} else if( (abs(targetDrive) - abs(perpDrive)) < PID_DRIVE_MIN ){
+  		// scale the drive values proportionally to how much they are under the min
       targetDrive = (targetDrive/(targetDrive + perpDrive)) * PID_DRIVE_MIN;
 			perpDrive = (perpDrive/(targetDrive + perpDrive)) * PID_DRIVE_MIN;
     }
 
     // send to drivetrain
+    /*
+    	If the robot is turned right, the front value (sideSonicF) will be
+    	greater than the back value (sideSonicF). Therefore, perpDrive will
+    	be positive. To make a left turn and correct for the error, the left
+    	drive motor will need to slow down and the right drive motor will
+    	need to speed up. Therefore, perpDrive is subtracted from
+    	targetDrive on the left side and is added on the right side.
+    */
     motor[leftDrive] = targetDrive - perpDrive;
     motor[rightDrive] = targetDrive + perpDrive;
 	  wait1Msec(10);
